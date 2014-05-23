@@ -37,10 +37,6 @@
   - name: Install git
     yum: pkg=git state=installed
 
-  - name: Copy default virtual server
-    copy: src=templates/etc/httpd/conf.d/10-app.conf dest=/etc/httpd/conf.d/10-app.conf
-    notify: restart httpd
-
 # Install project specific software
 
   - name: Install build prequisites

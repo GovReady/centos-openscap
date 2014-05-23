@@ -34,9 +34,6 @@
   - name: Ensure Apache running
     service: name=httpd state=started enabled=yes
 
-  - name: Install git
-    yum: pkg=git state=installed
-
 # Install project specific software
 
   - name: Install build prequisites

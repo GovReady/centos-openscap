@@ -21,10 +21,41 @@ This repo contains a Vagrant file and Ansible Playbook to automatically configur
 
 RHEL involves licenses. To do simple learning, it's best to have an open source computer that is also does not have up front costs.
 
-## Manual Installation Instructions (from Ben)
 
-Installation issues:
--------------------
+## Manual installation of openSCAP and SCAP Security Guide
+
+1. Log into your server running CentOS 6.4. If a command does not work, run with `sudo`
+2. Add epel RPM repository CentOS 6
+```
+su -c 'rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm'
+```
+Alternatively:
+```
+wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+sudo rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm
+```
+3. Install openSCAP
+```
+yum install -y openscap openscap-utils openscap-content
+```
+4. Install SCAP Security Guide
+```
+yum -y install scap-security-guide
+```
+
+## Running openSCAP system scan
+Here's an example of running openSCAP against the 
+
+```
+cd ~/
+oscap xccdf eval --profile stig-rhel6-server \
+	--results ~/results-stig-rhel6-server.xml \
+	--report ~/report-stig-rhel6-server.html \
+	--cpe /usr/share/xml/scap/ssg/content/ssg-rhel6-cpe-dictionary.xml \
+	/usr/share/xml/scap/ssg/content/ssg-rhel6-xccdf.xml ; true
+```
+
 
 
 ## Links
@@ -45,5 +76,3 @@ More on Ansible
 * Ansible loop you indicate the command and then add `with_items` YAML list. 
 * Ansible copy file by defaults copies `src` from Ansible computer to `dest` on guest (target) server. You can set mode and ownership
 * Copying files really is an easy way manage firewalls and vhost configurations.
-
-

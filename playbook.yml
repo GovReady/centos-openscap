@@ -18,28 +18,28 @@
     copy: src=templates/etc/sysconfig/iptables dest=/etc/sysconfig/iptables owner=root group=root mode=0600
     notify: restart iptables
 
-  - name: Install http
-    yum: pkg={{ item }} state=installed
-    with_items:
-      - httpd
-
-  - name: Copy govready minisite
-    copy: src=vendor/govready/minisite dest=/etc/httpd/conf.d/httpd-govready.conf
-    notify: restart httpd
-
-  - name: Copy httpd-govready.conf for govready minisite
-    copy: src=vendor/govready/templates/httpd-govready.conf dest=/etc/httpd/conf.d/httpd-govready.conf
-    notify: restart httpd
-
-  - name: Ensure Apache running
-    service: name=httpd state=started enabled=yes
-
-  - name: Install git
-    yum: pkg=git state=installed
-
-  - name: Copy default virtual server
-    copy: src=templates/etc/httpd/conf.d/10-app.conf dest=/etc/httpd/conf.d/10-app.conf
-    notify: restart httpd
+#  - name: Install http
+#    yum: pkg={{ item }} state=installed
+#    with_items:
+#      - httpd
+#
+#  - name: Copy govready minisite
+#    copy: src=vendor/govready/minisite dest=/etc/httpd/conf.d/httpd-govready.conf
+#    notify: restart httpd
+#
+#  - name: Copy httpd-govready.conf for govready minisite
+#    copy: src=vendor/govready/templates/httpd-govready.conf dest=/etc/httpd/conf.d/httpd-govready.conf
+#    notify: restart httpd
+#
+#  - name: Ensure Apache running
+#    service: name=httpd state=started enabled=yes
+#
+#  - name: Install git
+#    yum: pkg=git state=installed
+#
+#  - name: Copy default virtual server
+#    copy: src=templates/etc/httpd/conf.d/10-app.conf dest=/etc/httpd/conf.d/10-app.conf
+#    notify: restart httpd
 
 # Install project specific software
 
@@ -48,7 +48,7 @@
     with_items:
       - make 
       - gcc
-     sudo: True
+    sudo: True
 
   - name: Add epel RPM repository CentOS 6
     shell: su -c 'rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm'

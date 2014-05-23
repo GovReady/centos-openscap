@@ -5,7 +5,7 @@ GovReady centos-openscap
 
 | Date         | Status | Time to Build |
 |--------------|-------------|-------------|
-| May 22, 2014 Created| - | - |
+| May 23, 2014 Created| Build OK. openSCAP OK. | About 10 minutes or less |
 
 A Virtual Machine for Exploring openSCAP on CentOS
 

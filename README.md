@@ -21,6 +21,29 @@ This repo contains a Vagrant file and Ansible Playbook to automatically configur
 
 RHEL involves licenses. To do simple learning, it's best to have an open source computer that is also does not have up front costs.
 
+## Requirements
+This repo uses Vagrant and VirtualBox to instantiate a virtual machine running CentOS 6.4.
+
+Requirements:
+- VirtualBox (http://virtualbox.org)
+- Vagrant (http://vagrantup.com)
+
+## Instructions
+After you install VirtualBox and Vagrant, clone this repository and run `vagrant up`.
+
+Remember to first `cd` into the directory where you want to save this repo!
+
+```
+git clone git@github.com:GovReady/centos-openscap.git
+cd centos-openscap
+vagrant up
+# Watch as everything is installed in about 10 minutes.
+```
+
+You can now log into your running CentOS with openSCAP and SSG installed.
+```
+vagrant ssh
+```
 
 ## Manual installation of openSCAP and SCAP Security Guide
 
@@ -60,7 +83,8 @@ oscap xccdf eval --profile usgcb-rhel6-server \
 
 ```
 
-
+# Additional
+There is a simple landing page at `http://localhost:8080/govready` that corresponds to the CentOS directory `/var/www/govready-html`.
 
 ## Links
 

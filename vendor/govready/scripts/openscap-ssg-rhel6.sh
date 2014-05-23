@@ -1,14 +1,17 @@
 #!/bin/sh
 
-echo "oscap xccdf eval --profile test"
+#
+# Bash shell script to run openSCAP test of RHEL-6
+# Copyright 2014, Greg Elin
+# License: Apache 2.0
+#
+# Usage: sudo sh openscap-ssg-rhel6.sh
+# Dependencies: 
+#   - openscap, see install-openscap.sh
+#   - ssg, see install-ssg.sh
+#
 
-oscap xccdf eval --profile test \
-	--results /srv/govready/audit/reports/results-test.xml \
-	--report /srv/govready/audit/reports/report-test.html \
-	--cpe /usr/share/xml/scap/ssg/content/ssg-rhel6-cpe-dictionary.xml \
-	/usr/share/xml/scap/ssg/content/ssg-rhel6-xccdf.xml ; true
-
-echo "oscap xccdf eval --profile stig-rhel6-server"
+echo "oscap xccdf eval --profile ssg-rhel6-xccdf-rhel6-server"
 
 oscap xccdf eval --profile stig-rhel6-server \
 	--results /srv/govready/audit/reports/results-stig-rhel6-server.xml \

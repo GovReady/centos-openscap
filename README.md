@@ -25,6 +25,7 @@ RHEL involves licenses. To do simple learning, it's best to have an open source 
 ## Manual installation of openSCAP and SCAP Security Guide
 
 Step 1. Log into your server running CentOS 6.4. If a command does not work, run with `sudo`
+
 Step 2. Add epel RPM repository CentOS 6
 ```
 su -c 'rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm'
@@ -35,10 +36,12 @@ wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 sudo rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm
 ```
+
 Step 3. Install openSCAP
 ```
 yum install -y openscap openscap-utils openscap-content
 ```
+
 Step 4. Install SCAP Security Guide
 ```
 yum -y install scap-security-guide

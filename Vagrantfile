@@ -24,16 +24,19 @@ Vagrant.configure("2") do |config|
   end
 
   # Set up synched folder for working on htm web app files on the host computer (also ensures the directory is created)
-  config.vm.synced_folder "app/", "/var/www/app/", id: "html  -root", create: true   
+  # config.vm.synced_folder "app/", "/var/www/app/", id: "html -root", create: true   
 
 
-  # Install scap
-  #config.vm.provision :shell, :path => "templates/srv/govready/audit/resources/scripts/scap-install.sh"
+  # Install openSCAP
+  config.vm.provision :shell, :path => "vendor/govready/scripts/install-openscap.sh"
+
+  # Install SCAP Security Guide
+  config.vm.provision :shell, :path => "vendor/govready/scripts/install-ssg.sh"
 
   # Run simple scap test
-  #config.vm.provision :shell, :path => "templates/srv/govready/audit/resources/scripts/oscap-rhel6-test2.sh"
+  config.vm.provision :shell, :path => "vendor/govready/scripts/oscap-rhel6-test2.sh"
 
   # Run stig-rhel6-server scap test
-  #config.vm.provision :shell, :path => "templates/srv/govready/audit/resources/scripts/oscap-rhel6.sh"
+  config.vm.provision :shell, :path => "vendor/govready/scripts/oscap-rhel6.sh"
 
 end

@@ -9,6 +9,7 @@
 # Dependencies: 
 #   - openscap, see install-openscap.sh
 #
+# rpm: scap-security-guide-0.1-16.el6.noarch
 
 
 # If scap-security-guide not installed, install it

@@ -1,12 +1,12 @@
 #!/bin/sh
 
-echo "--profile test"
+echo "--profile usgcb-rhel6-server"
 
-oscap xccdf eval --profile test \
-	--results /srv/govready/audit/reports/results-test-micro.xml \
-	--report /srv/govready/audit/reports/results-test-micro.html \
-	--cpe /srv/govready/audit/resources/ssg/content/ssg-rhel6-cpe-dictionary.xml \
-	/srv/govready/audit/resources/ssg/content/ssg-rhel6-test2-xccdf.xml ; true
+oscap xccdf eval --profile usgcb-rhel6-server \
+	--results /var/www/govready-html/usgcb-rhel6-server.xml \
+	--report /var/www/govready-html/usgcb-rhel6-server.html \
+	--cpe /usr/share/xml/scap/ssg/content/ssg-rhel6-cpe-dictionary.xml \
+	/usr/share/xml/scap/ssg/content/ssg-rhel6-xccdf.xml ; true
 
 #
 # Gotchas

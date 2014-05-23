@@ -30,72 +30,23 @@
   - name: Ensure Apache running
     service: name=httpd state=started enabled=yes
 
-  - name: Install git
-    yum: pkg=git state=installed
-
-  # vagrant #   copy: src=templates/srv/govready dest=/srv
-
-   # - name: install composer
-   #   shell: >
-   #       curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
-   #   when: "useComposer == true"
-
-   # - name: move composer.phar to /usr/local/bin/composer
-   #   shell: >
-   #      mv /usr/local/bin/composer.phar /usr/local/bin/composer
-   #   when: "useComposer == true"
-
-  # Install project specific software
+#  - name: Install git
+#    yum: pkg=git state=installed
 
   - name: Copy default virtual server
     copy: src=templates/etc/httpd/conf.d/10-app.conf dest=/etc/httpd/conf.d/10-app.conf
     notify: restart httpd
 
-  - name: Install build prequisites
-    yum: pkg={{ item }} state=installed
-    with_items:
-      - make 
-      - gcc
-      - gsl-devel
-      - sqlite-devel
-    sudo: True
+# Install project specific software
 
-  - name: Install R devtools prequisites
-    yum: pkg={{ item }} state=installed
-    with_items:
-      - curl-devel
-    sudo: True
+#  - name: Install build prequisites
+#    yum: pkg={{ item }} state=installed
+#    with_items:
+#      - make 
+#      - gcc
+#     sudo: True
+#
+#
+#  - name: Add epel RPM repository CentOS 6
+#    shell: su -c 'rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm'
 
-  - name: Download Apophenia
-    get_url: url=http://softlayer-ams.dl.sourceforge.net/project/apophenia/apophenia-0.999-19_Mar_14.tgz dest=/home/vagrant mode=755
-
-  - name: Quietly untar Apophenia overwriting the previous dir
-    command: tar -zxf /home/vagrant/apophenia-0.999-19_Mar_14.tgz --overwrite --overwrite-dir
-
-  - name: Ensure Apophenia is installed
-    action: command {{ item }} chdir=/home/vagrant/apophenia-0.999
-    with_items:
-      - ./configure
-      - make
-      - make install
-    sudo: True
-
-  - name: Add epel RPM repository CentOS 6
-    shell: su -c 'rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm'
-
-   #  - name: Update yum
-   # shell: yum update -y
-   # sudo: True
-
-  - name: Install R from rpm
-    shell: yum install R -y
-    sudo: True
-
-  - name: Install R Libraries for Tea
-    shell: R -e 'install.packages(c("devtools", "ggplot2", "RSQLite", "multicore", "MCMCpack", "gdata", "tree", "testthat"), repos="http://watson.nci.nih.gov/cran_mirror/")'
-
-  - name: Download/install Rapophenia
-    shell: R -e 'library(devtools); install_github("b-k/Rapophenia", ref="pkg")'
-
-  - name: Download/install Tea
-    shell: R -e 'library(devtools); install_github("rodri363/tea", ref="pkg")'

@@ -52,11 +52,12 @@ Here's an example of running openSCAP against the
 
 ```
 cd ~/
-oscap xccdf eval --profile stig-rhel6-server \
-	--results ~/results-stig-rhel6-server.xml \
-	--report ~/report-stig-rhel6-server.html \
+oscap xccdf eval --profile usgcb-rhel6-server \
+	--results ~/usgcb-rhel6-server.xml \
+	--report ~/usgcb-rhel6-server.html \
 	--cpe /usr/share/xml/scap/ssg/content/ssg-rhel6-cpe-dictionary.xml \
 	/usr/share/xml/scap/ssg/content/ssg-rhel6-xccdf.xml ; true
+
 ```
 
 

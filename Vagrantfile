@@ -10,7 +10,11 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos-64-x64-vbox4210"
   config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box"
   config.vm.hostname = "govready-centos-openscap"
-  
+
+  config.vm.provider "virtualbox" do |vb|
+  # Don't boot with headless mode
+    vb.gui = true
+  end
 
   # network config
   config.vm.network :private_network, ip: "192.168.56.101"

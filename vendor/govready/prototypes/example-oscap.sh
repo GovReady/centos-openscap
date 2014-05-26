@@ -23,6 +23,15 @@ oscap xccdf eval --profile $profile \
 	--report /var/www/govready-html/$profile.html \
 	--cpe /usr/share/xml/scap/ssg/content/ssg-rhel6-cpe-dictionary.xml \
 	/usr/share/xml/scap/ssg/content/ssg-rhel6-xccdf.xml ; true
+
+
+profile="usgcb-rhel6-server"
+oscap xccdf eval --profile $profile \
+	--results /var/www/govready-html/$profile2-fixed.xml \
+	--report /var/www/govready-html/$profile-fixed.html \
+	--cpe /usr/share/xml/scap/ssg/content/ssg-rhel6-cpe-dictionary.xml \
+	/usr/share/xml/scap/ssg/content/ssg-rhel6-xccdf.xml ; true
+
 	
 
 profile="test"
@@ -83,6 +92,28 @@ oscap xccdf eval --profile $rule \
 
 # Unbundling just profiles does not work bc results generation spits out all rules from input xml.
 
+# Profiles for severity
+profile="severity_high"
+sudo oscap xccdf eval --profile $profile \
+	--results /var/www/govready-html/$profile.xml \
+	--report /var/www/govready-html/$profile.html \
+	--cpe /usr/share/xml/scap/ssg/content/ssg-rhel6-cpe-dictionary.xml \
+	/vagrant/vendor/govready/prototypes/ssg-rhel6-xccdf-unbundled.xml ; true
+sudo chown apache:apache /var/www/govready-html/$profile*
+
+# generate custom reports
+oscap [options] xccdf generate [options] <subcommand> [sub-options] benchmark-file.xml
+Usage: oscap [options] xccdf generate [options] custom --stylesheet <file> [--output <file>] xccdf-file.xml
+
+oscap xccdf generate custom --stylesheet /vagrant/vendor/govready/prototypes/openscap/xsl/xccdf-report.xsl --output /var/www/govready-html/gr-xccdf.html /var/www/govready-html/severity_high.xml
+oscap xccdf generate custom --stylesheet /vagrant/vendor/govready/prototypes/openscap/xsl/xccdf-report.xsl --output /var/www/govready-html/gr-xccdf.html /var/www/govready-html/usgcb-rhel6-server.xml
+
+oscap xccdf generate custom --stylesheet /vagrant/vendor/govready/prototypes/openscap/xsl/xccdf-report.xsl \
+  --output /var/www/govready-html/usgcb-rhel6-server-fixed.html /var/www/govready-html/usgcb-rhel6-server.xml
+
+
+# Generate fixes from SSG
+oscap xccdf generate fix --result-id xccdf_org.open-scap_testresult_usgcb-rhel6-server /var/www/govready-html/usgcb-rhel6-server.xml > usgcb-rhel6-server.sh
 
 # 
 Often times a single XCCDF Rule corresponds with a single OVAL definition. In such cases there is an easy way to evaluate single oval definition:

@@ -38,6 +38,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :path => "vendor/govready/scripts/install-ssg.sh"
 
   # Run SCPA Security Guide Scan
-  config.vm.provision :shell, :path => "vendor/govready/scripts/openscap-ssg-rhel6.sh"
+  config.vm.provision :shell, :path => "vendor/govready/scripts/usgcb-rhel6-server-tests.sh"
 
 end

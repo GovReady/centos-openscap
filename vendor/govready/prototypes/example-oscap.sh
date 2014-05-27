@@ -113,7 +113,14 @@ oscap xccdf generate custom --stylesheet /vagrant/vendor/govready/prototypes/ope
 
 
 # Generate fixes from SSG
-oscap xccdf generate fix --result-id xccdf_org.open-scap_testresult_usgcb-rhel6-server /var/www/govready-html/usgcb-rhel6-server.xml > usgcb-rhel6-server.sh
+# The result-id field can be found on the top line of the report that was previously generated.  It is possible to manually determine the result id, which is part of the specification for SCAP, by prepending “xccdf_org.open-scap_testresult_” to the name of the profile that was used to scan the server.
+oscap xccdf generate fix --result-id xccdf_org.open-scap_testreosult_usgcb-rhel6-server /var/www/govready-html/usgcb-rhel6-server.xml > usgcb-rhel6-server.sh
+
+
+# Loop through various aqueduct scripts
+
+for f in `ls audit*.sh`;do echo $f;sh $f;done
+
 
 # 
 Often times a single XCCDF Rule corresponds with a single OVAL definition. In such cases there is an easy way to evaluate single oval definition:

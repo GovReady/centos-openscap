@@ -19,7 +19,7 @@ if [ ! -f /etc/yum.repos.d/epel-6-openscap.repo ]
 then
 	echo "openSCAP repo not installed, installing"
 	# Install openSCAP as per http://www.open-scap.org/page/Download
-	yum install openscap openscap-utils openscap-content
+	yum -y install openscap openscap-utils openscap-content
 else
 	echo "openSCAP already installed"
 fi
